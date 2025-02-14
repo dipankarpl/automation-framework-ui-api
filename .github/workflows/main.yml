@@ -26,7 +26,7 @@ jobs:
         cache: maven
         
     - name: Execute Tests
-      run: mvn clean test -Denvironment=qa -Dbrowser=chrome -Dremote_execution=false -Dheadless=false -X
+      run: mvn clean test -Dsuitexmlfile=testng_regression.xml -Denvironment=qa -Dbrowser=chrome -Dremote_execution=false -Dheadless=true -X
 
     - name: Upload a Build Artifact
       if: always()
