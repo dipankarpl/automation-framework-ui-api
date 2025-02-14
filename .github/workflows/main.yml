@@ -26,7 +26,7 @@ jobs:
         cache: maven
         
     - name: Execute Tests
-      run: mvn clean test -Denvironment=qa -Dbrowser=chrome -Dremote_execution=false -Dheadless=true -X
+      run: mvn clean test -DtestType=testng_sanity -Denvironment=qa -Dbrowser=chrome -Dremote_execution=false -Dheadless=true -X
 
     - name: Upload a Build Artifact
       if: always()
