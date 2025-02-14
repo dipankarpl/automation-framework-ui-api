@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
-		<testType>testng_sanity.xml</testType>
+		<suitexmlfile>testng_sanity.xml</suitexmlfile>
 	</properties>
 
 	<dependencies>
@@ -116,7 +116,7 @@
 					<version>3.5.1</version>
 					<configuration>
 						<suiteXmlFiles>
-							<suiteXmlFile>${testType}</suiteXmlFile>
+							<suiteXmlFile>${suitexmlfile}</suiteXmlFile>
 						</suiteXmlFiles>
 						<systemPropertyVariables>
 							<environment>${environment}</environment>
