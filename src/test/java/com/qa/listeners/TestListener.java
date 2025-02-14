@@ -11,11 +11,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.qa.ui.base.TestBase;
-import com.qa.utils.BrowserUtil;
 import com.qa.utils.ExtentReportUtil;
 import com.qa.utils.LoggerUtil;
-
 
 public class TestListener implements ITestListener {
 	Logger logger = LoggerUtil.getLogger(this.getClass());
@@ -33,18 +30,21 @@ public class TestListener implements ITestListener {
 	}
 
 	public void onTestSuccess(ITestResult result) {
+
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReportUtil.getTest().log(Status.PASS, result.getMethod().getMethodName() + " " + "PASSED");
+		ExtentReportUtil.getTest().log(Status.PASS,
+				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "PASSED");
 	}
 
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
-		ExtentReportUtil.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " " + "FAILED");
+		ExtentReportUtil.getTest().log(Status.FAIL,
+				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "FAILED");
 		ExtentReportUtil.getTest().log(Status.FAIL, result.getThrowable().getMessage());
 
-		Object testclass = result.getInstance();
-		
+//		Object testclass = result.getInstance();
+
 		/*
 		 * BrowserUtil browserUtil = (BrowserUtil) testclass;
 		 * logger.info("Capturing Screenshot for the failed tests");
@@ -55,12 +55,13 @@ public class TestListener implements ITestListener {
 		 * 
 		 * ExtentReportUtil.getTest().addScreenCaptureFromPath(screenshotPath);
 		 */
-		 
+
 	}
 
 	public void onTestSkipped(ITestResult result) {
 		logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
-		ExtentReportUtil.getTest().log(Status.SKIP, result.getMethod().getMethodName() + " " + "SKIPPED");
+		ExtentReportUtil.getTest().log(Status.SKIP,
+				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "SKIPPED");
 
 	}
 
