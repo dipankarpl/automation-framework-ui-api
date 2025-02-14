@@ -35,4 +35,10 @@ jobs:
        name: Logs
        path: logs/
 
+    - name: Upload a Build Artifact
+      if: always()
+      uses: actions/upload-artifact@v4.4.3
+      with:
+       name: Report
+       path: report.html
       
