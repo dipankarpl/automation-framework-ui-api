@@ -1,4 +1,4 @@
-package com.qa.base;
+package com.qa.ui.base;
 
 import java.time.Duration;
 

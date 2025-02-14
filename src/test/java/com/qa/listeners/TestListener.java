@@ -11,7 +11,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.qa.base.TestBase;
+import com.qa.ui.base.TestBase;
 import com.qa.utils.BrowserUtil;
 import com.qa.utils.ExtentReportUtil;
 import com.qa.utils.LoggerUtil;

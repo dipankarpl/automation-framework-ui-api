@@ -4,9 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.qa.base.TestBase;
 import com.qa.constants.AppConstants;
 import com.qa.pojo.Registration;
+import com.qa.ui.base.TestBase;
 import com.qa.utils.FakerUtil;
 
 @Listeners({ com.qa.listeners.TestListener.class })

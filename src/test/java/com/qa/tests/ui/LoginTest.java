@@ -4,9 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.qa.base.TestBase;
 import com.qa.constants.AppConstants;
 import com.qa.pojo.User;
+import com.qa.ui.base.TestBase;
 
 @Listeners({ com.qa.listeners.TestListener.class })
 public class LoginTest extends TestBase {

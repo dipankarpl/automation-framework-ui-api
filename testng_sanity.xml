@@ -13,7 +13,23 @@
 			<class name="com.qa.tests.ui.SignupTest" />
 			<class name="com.qa.tests.ui.LoginTest" />
 		</classes>
-	</test> <!--
-	Test -->
+	</test>
+	
+	<test name="API-Test">
+		
+		<groups>
+			<run>
+				<include name="sanity"></include>
+			</run>
+		</groups>
+
+		<classes>
+			<class name="com.qa.tests.api.LoginTest" />
+			<class name="com.qa.tests.api.SignUpTest" />
+			<class name="com.qa.tests.api.ForgotPasswordTest" />
+			<class name="com.qa.tests.api.UpdateProfileTest" />
+		</classes>
+	</test>
+	
 </suite> <!--
 Suite -->
