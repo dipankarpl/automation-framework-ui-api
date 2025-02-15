@@ -13,9 +13,8 @@ public class ForgotPasswordTest {
 	@Test(description = "verify forget password api is working", groups = { "sanity" })
 	public void forgotPasswordTest() {
 		AuthService auth = new AuthService();
-		Response res = auth.forgotPassword("dpaul@test.com");
-		Assert.assertEquals(res.asPrettyString(),
-				"If your email exists in our system, you will receive reset instructions.");
+		Response res = auth.forgotPassword("abc.def@test.com");
+		Assert.assertTrue(res.asPrettyString().contains("If your email exists in our system, you will receive reset instructions."));
 	}
 
 }

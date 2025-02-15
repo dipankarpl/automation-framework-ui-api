@@ -9,7 +9,7 @@ import com.qa.utils.DataProviderUtil;
 
 public class DataProviders {
 
-	@DataProvider(name = "LoginTestExcelDataProvider", parallel=true)
+	@DataProvider(name = "LoginTestExcelDataProvider")
 	public Iterator<User> loginExcelDataProvider() {
 		return DataProviderUtil.getTestDataFromExcel("LoginData.xlsx", "LoginTestData");
 	}

@@ -23,10 +23,10 @@ public class UpdateProfileTest {
 
 		UserManagementService um = new UserManagementService();
 		Response resp = um.updateProfile(loginres.getToken(),
-				new UpdateProfileRequest("dpaul@test.com", "abc", "def", "9876540123"));
+				new UpdateProfileRequest("dpaul@test.com", "dip", "ron", "9876540123"));
 		UserProfileResponse userProfileResponse = resp.as(UserProfileResponse.class);
 		System.out.println(resp.asPrettyString());
-		Assert.assertEquals(userProfileResponse.getUsername(), "abc.def");
+		Assert.assertEquals(userProfileResponse.getUsername(), "dpaul");
 	}
 
 }

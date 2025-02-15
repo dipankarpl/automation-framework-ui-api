@@ -20,11 +20,6 @@ public class TestBase {
 
 	public void setUp() {
 		driver = WebDriverManager.getDriver();
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-			if (driver != null) {
-				driver.quit();
-			}
-		}));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(AppConstants.DEFAULT_MEDIUM_TIME_OUT));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(AppConstants.DEFAULT_MEDIUM_TIME_OUT));
