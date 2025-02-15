@@ -9,8 +9,10 @@ import org.testng.ITestResult;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.qa.drivers.WebDriverManager;
 import com.qa.utils.ExtentReportUtil;
 import com.qa.utils.LoggerUtil;
 
@@ -43,18 +45,22 @@ public class TestListener implements ITestListener {
 				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "FAILED");
 		ExtentReportUtil.getTest().log(Status.FAIL, result.getThrowable().getMessage());
 
-//		Object testclass = result.getInstance();
+		
+		logger.info("Capturing Screenshot for the failed tests");
+//		test.get().fail(result.getThrowable(), MediaEntityBuilder
+//				.createScreenCaptureFromPath(DriverFactory.getScreenshot(methodName), methodName).build());
+		
+		logger.info("Attaching the Screenshot to the HTML File");
+		
+		ExtentReportUtil.getTest().fail(result.getThrowable(),
+				MediaEntityBuilder
+						.createScreenCaptureFromPath(WebDriverManager.getScreenshot(result.getMethod().getMethodName()),
+								result.getMethod().getMethodName())
+						.build());
+//		String screenshotPath = browserUtil.takeScreenShot(result.getMethod().getMethodName());
+		
 
-		/*
-		 * BrowserUtil browserUtil = (BrowserUtil) testclass;
-		 * logger.info("Capturing Screenshot for the failed tests");
-		 * 
-		 * String screenshotPath =
-		 * browserUtil.takeScreenShot(result.getMethod().getMethodName());
-		 * logger.info("Attaching the Screenshot to the HTML File");
-		 * 
-		 * ExtentReportUtil.getTest().addScreenCaptureFromPath(screenshotPath);
-		 */
+//		ExtentReportUtil.getTest().addScreenCaptureFromPath(screenshotPath);
 
 	}
 

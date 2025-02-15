@@ -15,7 +15,7 @@ public class LoginTest extends TestBase {
 	public void testLoginPageTitle() {
 
 		String url = loginPage.getLoginPageURL();
-		Assert.assertTrue(url.contains(AppConstants.LOGIN_PAGE_URL));
+		Assert.assertTrue(url.contains(AppConstants.LOGIN_PAGE_URL+" "));
 	}
 
 	@Test(description = "Verifies with the valid user is able to login into the application", groups = { "regression",
