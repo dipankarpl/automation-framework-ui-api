@@ -1,0 +1,50 @@
+name: API Test Framnework
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      issues: write
+    steps:
+    - uses: actions/checkout@v4
+
+    
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Execute Tests
+      run: mvn clean test -Dsuitexmlfile=testng_regression.xml -Denvironment=qa -Dbrowser=chrome -Dremote_execution=false -Dheadless=true -X
+
+    - name: Upload log
+      if: always()
+      uses: actions/upload-artifact@v4.4.3
+      with:
+       name: Logs
+       path: logs/
+
+    - name: Upload report
+      if: always()
+      uses: actions/upload-artifact@v4.4.3
+      with:
+       name: Report
+       path: report.html
+
+    - name: Upload Surefire Reports
+      if: failure()
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: surefire-reports
+        path: target/surefire-reports/
