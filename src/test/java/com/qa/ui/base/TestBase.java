@@ -17,7 +17,7 @@ public class TestBase {
 	protected LoginPage loginPage;
 
 	@BeforeMethod(alwaysRun = true)
-
+	
 	public void setUp() {
 		driver = WebDriverManager.getDriver();
 		driver.manage().window().maximize();

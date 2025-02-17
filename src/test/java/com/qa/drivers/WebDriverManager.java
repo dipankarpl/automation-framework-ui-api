@@ -2,6 +2,7 @@ package com.qa.drivers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
@@ -14,7 +15,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.qa.utils.ConfigUtil;
@@ -30,43 +30,73 @@ public class WebDriverManager {
 	}
 
 	private static WebDriver createDriver() {
+
 		String browser = System.getProperty("browser", "edge");
 		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "false"));
-		WebDriver driverInstance;
+		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "true"));
+		WebDriver driverInstance=null;
 
-		if (remoteExecution) {
-			DesiredCapabilities capabilities = new DesiredCapabilities();
-			capabilities.setBrowserName(browser);
-			try {
-				driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), capabilities);
-			} catch (Exception e) {
-				throw new RuntimeException("Failed to connect to Selenium Grid: " + e.getMessage());
-			}
-		} else {
-			switch (browser.toLowerCase()) {
-			case "chrome":
-				ChromeOptions chromeOptions = new ChromeOptions();
-				if (headless)
-					chromeOptions.addArguments("--headless");
+		switch (browser.toLowerCase()) {
+		case "chrome": {
+			ChromeOptions chromeOptions = new ChromeOptions();
+			if (headless)
+				chromeOptions.addArguments("--headless");
+			chromeOptions.setCapability("browserName", browser);
+
+			if (remoteExecution) {
+				try {
+					driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), chromeOptions);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+			} else {
 				driverInstance = new ChromeDriver(chromeOptions);
-				break;
-			case "edge":
-				EdgeOptions edgeOptions = new EdgeOptions();
-				if (headless)
-					edgeOptions.addArguments("--headless");
-				driverInstance = new EdgeDriver(edgeOptions);
-				break;
-			case "firefox":
-				FirefoxOptions firefoxOptions = new FirefoxOptions();
-				if (headless)
-					firefoxOptions.addArguments("--headless");
-				driverInstance = new FirefoxDriver(firefoxOptions);
-				break;
-			default:
-				throw new IllegalArgumentException("Unsupported browser: " + browser);
 			}
+			break;
 		}
+		case "edge": {
+			EdgeOptions edgeOptions = new EdgeOptions();
+			if (headless)
+				edgeOptions.addArguments("--headless");
+			edgeOptions.setCapability("browserName", browser);
+
+			if (remoteExecution) {
+				try {
+					driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), edgeOptions);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				driverInstance = new EdgeDriver(edgeOptions);
+			}
+			break;
+		}
+		case "firefox": {
+			FirefoxOptions firefoxOptions = new FirefoxOptions();
+			if (headless)
+				firefoxOptions.addArguments("--headless");
+			firefoxOptions.setCapability("browserName", browser);
+
+			if (remoteExecution) {
+				try {
+					driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), firefoxOptions);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				driverInstance = new FirefoxDriver(firefoxOptions);
+			}
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + browser.toLowerCase());
+
+		}
+		
+		if (driverInstance == null) {
+            throw new RuntimeException("Driver initialization failed for browser: " + browser);
+        }
+		
 		return driverInstance;
 	}
 

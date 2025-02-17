@@ -3,21 +3,21 @@
 <suite name="Suite" thread-count="5" parallel="tests">
 
 	<test name="UI-Test" thread-count="5" parallel="methods">
-		
+		<parameter name="browser" value="chrome"></parameter>
 		<groups>
 			<run>
 				<include name="regression"></include>
 			</run>
 		</groups>
-
+		
 		<classes>
 			<class name="com.qa.tests.ui.SignupTest" />
 			<class name="com.qa.tests.ui.LoginTest" />
 		</classes>
 	</test>
-	
+
 	<test name="API-Test" thread-count="5" parallel="methods">
-		
+
 		<groups>
 			<run>
 				<include name="regression"></include>
@@ -31,6 +31,5 @@
 			<class name="com.qa.tests.api.UpdateProfileTest" />
 		</classes>
 	</test>
-	
-</suite> <!--
-Suite -->
+
+</suite>
