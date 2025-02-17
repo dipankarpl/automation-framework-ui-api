@@ -13,8 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.qa.utils.ConfigUtil;
@@ -32,71 +31,55 @@ public class WebDriverManager {
 	private static WebDriver createDriver() {
 
 		String browser = System.getProperty("browser", "edge");
-		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "true"));
-		WebDriver driverInstance=null;
+		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
+		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "false"));
+		WebDriver driverInstance = null;
 
-		switch (browser.toLowerCase()) {
-		case "chrome": {
-			ChromeOptions chromeOptions = new ChromeOptions();
-			if (headless)
-				chromeOptions.addArguments("--headless");
-			chromeOptions.setCapability("browserName", browser);
-
+		try {
 			if (remoteExecution) {
-				try {
-					driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), chromeOptions);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-			} else {
-				driverInstance = new ChromeDriver(chromeOptions);
-			}
-			break;
-		}
-		case "edge": {
-			EdgeOptions edgeOptions = new EdgeOptions();
-			if (headless)
-				edgeOptions.addArguments("--headless");
-			edgeOptions.setCapability("browserName", browser);
+				URL gridUrl = new URL(ConfigUtil.getGridUrl());
+				DesiredCapabilities capabilities = new DesiredCapabilities();
 
-			if (remoteExecution) {
-				try {
-					driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), edgeOptions);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
+				switch (browser.toLowerCase()) {
+				case "chrome":
+					ChromeOptions chromeOptions = new ChromeOptions();
+					if (headless)
+						chromeOptions.addArguments("--headless");
+					capabilities.merge(chromeOptions);
+					break;
+				case "edge":
+					EdgeOptions edgeOptions = new EdgeOptions();
+					if (headless)
+						edgeOptions.addArguments("--headless");
+					capabilities.merge(edgeOptions);
+					break;
+				default:
+					throw new IllegalArgumentException("Unsupported browser: " + browser);
 				}
-			} else {
-				driverInstance = new EdgeDriver(edgeOptions);
-			}
-			break;
-		}
-		case "firefox": {
-			FirefoxOptions firefoxOptions = new FirefoxOptions();
-			if (headless)
-				firefoxOptions.addArguments("--headless");
-			firefoxOptions.setCapability("browserName", browser);
 
-			if (remoteExecution) {
-				try {
-					driverInstance = new RemoteWebDriver(new URL(ConfigUtil.getGridUrl()), firefoxOptions);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
+				driverInstance = new RemoteWebDriver(gridUrl, capabilities);
+			} else {
+				switch (browser.toLowerCase()) {
+				case "chrome":
+					ChromeOptions chromeOptions = new ChromeOptions();
+					if (headless)
+						chromeOptions.addArguments("--headless");
+					driverInstance = new ChromeDriver(chromeOptions);
+					break;
+				case "edge":
+					EdgeOptions edgeOptions = new EdgeOptions();
+					if (headless)
+						edgeOptions.addArguments("--headless");
+					driverInstance = new EdgeDriver(edgeOptions);
+					break;
+				default:
+					throw new IllegalArgumentException("Unsupported browser: " + browser);
 				}
-			} else {
-				driverInstance = new FirefoxDriver(firefoxOptions);
 			}
-			break;
+		} catch (MalformedURLException e) {
+			throw new RuntimeException("Invalid Selenium Grid URL", e);
 		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + browser.toLowerCase());
 
-		}
-		
-		if (driverInstance == null) {
-            throw new RuntimeException("Driver initialization failed for browser: " + browser);
-        }
-		
 		return driverInstance;
 	}
 
