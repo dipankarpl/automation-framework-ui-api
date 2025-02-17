@@ -14,7 +14,7 @@ import com.qa.api.models.response.UserProfileResponse;
 import io.restassured.response.Response;
 
 @Listeners({ com.qa.listeners.TestListener.class })
-public class UpdateProfileTest {
+public class UpdateProfileAPITest {
 	@Test(description = "verify update profile api is working", groups = { "sanity" })
 	public void updateProfileTest() {
 		AuthService auth = new AuthService();

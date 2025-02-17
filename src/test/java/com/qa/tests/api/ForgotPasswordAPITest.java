@@ -9,7 +9,7 @@ import com.qa.api.base.AuthService;
 import io.restassured.response.Response;
 
 @Listeners({ com.qa.listeners.TestListener.class })
-public class ForgotPasswordTest {
+public class ForgotPasswordAPITest {
 	@Test(description = "verify forget password api is working", groups = { "sanity" })
 	public void forgotPasswordTest() {
 		AuthService auth = new AuthService();

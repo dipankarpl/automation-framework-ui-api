@@ -41,26 +41,19 @@ public class TestListener implements ITestListener {
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
+
 		ExtentReportUtil.getTest().log(Status.FAIL,
 				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "FAILED");
 		ExtentReportUtil.getTest().log(Status.FAIL, result.getThrowable().getMessage());
 
-		
-		logger.info("Capturing Screenshot for the failed tests");
-//		test.get().fail(result.getThrowable(), MediaEntityBuilder
-//				.createScreenCaptureFromPath(DriverFactory.getScreenshot(methodName), methodName).build());
-		
-		logger.info("Attaching the Screenshot to the HTML File");
-		
-		ExtentReportUtil.getTest().fail(result.getThrowable(),
-				MediaEntityBuilder
-						.createScreenCaptureFromPath(WebDriverManager.getScreenshot(result.getMethod().getMethodName()),
-								result.getMethod().getMethodName())
-						.build());
-//		String screenshotPath = browserUtil.takeScreenShot(result.getMethod().getMethodName());
-		
+		if (!result.getMethod().getMethodName().contains("API")) {
+			logger.info("Capturing Screenshot for the failed tests");
 
-//		ExtentReportUtil.getTest().addScreenCaptureFromPath(screenshotPath);
+			ExtentReportUtil.getTest().fail(result.getThrowable(),
+					MediaEntityBuilder.createScreenCaptureFromPath(
+							WebDriverManager.getScreenshot(result.getMethod().getMethodName()),
+							result.getMethod().getMethodName()).build());
+		}
 
 	}
 

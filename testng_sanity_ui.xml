@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="tests">
+
+	<test name="API-Test" thread-count="5" parallel="methods">
+
+		<groups>
+			<run>
+				<include name="sanity"></include>
+			</run>
+		</groups>
+		<packages>
+			<package name="com.qa.tests.ui"></package>
+		</packages>
+		<!--
+		<classes>
+			<class name="com.qa.tests.api.LoginTest" />
+			<class name="com.qa.tests.api.SignUpTest" />
+			<class name="com.qa.tests.api.ForgotPasswordTest" />
+			<class name="com.qa.tests.api.UpdateProfileTest" />
+		</classes>
+		-->
+	</test>
+
+</suite>

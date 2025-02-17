@@ -11,7 +11,7 @@ import com.qa.utils.FakerUtil;
 import io.restassured.response.Response;
 
 @Listeners({ com.qa.listeners.TestListener.class })
-public class SignUpTest {
+public class SignUpAPITest {
 	@Test(description = "verify signup api is working", groups = { "sanity" })
 	public void signUpTest() {
 		FakerUtil fakerUtil = new FakerUtil();
