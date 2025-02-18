@@ -41,9 +41,10 @@ public class TestListener implements ITestListener {
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
+		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
 
-		ExtentReportUtil.getTest().log(Status.FAIL,
-				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "FAILED");
+		ExtentReportUtil.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " "
+				+ result.getMethod().getDescription() + " " + browser + " FAILED");
 		ExtentReportUtil.getTest().log(Status.FAIL, result.getThrowable().getMessage());
 
 		if (!result.getMethod().getMethodName().contains("API")) {
@@ -51,7 +52,7 @@ public class TestListener implements ITestListener {
 
 			ExtentReportUtil.getTest().fail(result.getThrowable(),
 					MediaEntityBuilder.createScreenCaptureFromPath(
-							WebDriverManager.getScreenshot(result.getMethod().getMethodName()),
+							WebDriverManager.getScreenshot(result.getMethod().getMethodName(), browser),
 							result.getMethod().getMethodName()).build());
 		}
 
@@ -59,8 +60,9 @@ public class TestListener implements ITestListener {
 
 	public void onTestSkipped(ITestResult result) {
 		logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
-		ExtentReportUtil.getTest().log(Status.SKIP,
-				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "SKIPPED");
+		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
+		ExtentReportUtil.getTest().log(Status.SKIP, result.getMethod().getMethodName() + " "
+				+ result.getMethod().getDescription() + " " + browser + " SKIPPED");
 
 	}
 

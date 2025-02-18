@@ -133,7 +133,6 @@
 						</suiteXmlFiles>
 						<systemPropertyVariables>
 							<environment>${environment}</environment>
-							<browser>${browser}</browser>
 							<remote_execution>${remote_execution}</remote_execution>
 							<headless>${headless}</headless>
 						</systemPropertyVariables>

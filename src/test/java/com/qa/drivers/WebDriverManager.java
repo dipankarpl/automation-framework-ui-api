@@ -19,22 +19,23 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import com.qa.utils.ConfigUtil;
 
 public class WebDriverManager {
+
 	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-	public static WebDriver getDriver() {
+	public static WebDriver getDriver(String browser) {
 		if (driver.get() == null) {
-			driver.set(createDriver());
+			driver.set(createDriver(browser));
 		}
 		return driver.get();
 	}
 
-	private static WebDriver createDriver() {
+	private static WebDriver createDriver(String browsername) {
 
-		String browser = System.getProperty("browser", "edge");
-		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+		String browser = browsername;
+		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
 		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "false"));
 		WebDriver driverInstance = null;
-
+		
 		try {
 			if (remoteExecution) {
 				URL gridUrl = new URL(ConfigUtil.getGridUrl());
@@ -87,8 +88,8 @@ public class WebDriverManager {
 		driver.remove();
 	}
 
-	public static String getScreenshot(String methodName) {
-		File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);// temp dir
+	public static String getScreenshot(String methodName, String browser) {
+		File srcFile = ((TakesScreenshot) getDriver(browser)).getScreenshotAs(OutputType.FILE);// temp dir
 		String path = "./screenshots/" + methodName + "_" + System.currentTimeMillis() + ".png";
 		File destination = new File(path);
 		try {
