@@ -31,7 +31,7 @@ public class WebDriverManager {
 	private static WebDriver createDriver() {
 
 		String browser = System.getProperty("browser", "edge");
-		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
+		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "false"));
 		WebDriver driverInstance = null;
 
