@@ -32,7 +32,7 @@ public class WebDriverManager {
 	private static WebDriver createDriver(String browsername) {
 
 		String browser = browsername;
-		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
 		boolean remoteExecution = Boolean.parseBoolean(System.getProperty("remote_execution", "false"));
 		WebDriver driverInstance = null;
 		

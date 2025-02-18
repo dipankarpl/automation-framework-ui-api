@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.qa.constants.AppConstants;
 import com.qa.pojo.Registration;
 import com.qa.ui.base.TestBase;
 import com.qa.utils.FakerUtil;
@@ -12,7 +11,7 @@ import com.qa.utils.FakerUtil;
 @Listeners({ com.qa.listeners.TestListener.class })
 public class SignupTest extends TestBase {
 
-	@Test(description = "Verifies user is able to signup to the application", groups = { "sanity" })
+	@Test(description = "Verifies user is able to signup to the application", groups = { "sanity", "regression" })
 	public void testSignup() {
 		FakerUtil fakerUtil = new FakerUtil();
 		Registration reg = new Registration(fakerUtil.randomUsername(), fakerUtil.randomEmail(), "password", "password",
