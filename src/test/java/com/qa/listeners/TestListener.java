@@ -48,10 +48,10 @@ public class TestListener implements ITestListener {
 
 		if (!result.getMethod().getMethodName().contains("API")) {
 			logger.info("Capturing Screenshot for the failed tests");
-
+			String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
 			ExtentReportUtil.getTest().fail(result.getThrowable(),
 					MediaEntityBuilder.createScreenCaptureFromPath(
-							WebDriverManager.getScreenshot(result.getMethod().getMethodName()),
+							WebDriverManager.getScreenshot(result.getMethod().getMethodName(), browser),
 							result.getMethod().getMethodName()).build());
 		}
 
