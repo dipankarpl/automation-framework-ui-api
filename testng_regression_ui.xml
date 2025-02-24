@@ -9,19 +9,17 @@
 				<include name="regression"></include>
 			</run>
 		</groups>
-		
-		<!--
+
 		<packages>
 			<package name="com.qa.tests.ui"></package>
 		</packages>
-		-->		
-		
+
 		<classes>
 			<class name="com.qa.tests.ui.SignupTest" />
 		</classes>
-		
+
 	</test>
-	
+
 	<test name="UI-Test-edge" thread-count="5" parallel="methods">
 		<parameter name="browser" value="edge"></parameter>
 		<groups>
@@ -29,18 +27,16 @@
 				<include name="regression"></include>
 			</run>
 		</groups>
-		
-		<!--
+
 		<packages>
 			<package name="com.qa.tests.ui"></package>
 		</packages>
-		-->
-		
-		
+
+
 		<classes>
 			<class name="com.qa.tests.ui.LoginTest" />
 		</classes>
-		
+
 	</test>
 
 </suite>

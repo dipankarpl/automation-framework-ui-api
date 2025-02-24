@@ -11,6 +11,7 @@ public class ExtentReportUtil {
 	public static void setupSparkReporter(String reportName) {
 		ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(
 				System.getProperty("user.dir") + "//" + reportName);
+		extentSparkReporter.config().setReportName("Automation Test Results");
 		extentReports = new ExtentReports();
 		extentReports.attachReporter(extentSparkReporter);
 	}

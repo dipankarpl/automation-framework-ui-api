@@ -9,6 +9,7 @@
 				<include name="sanity"></include>
 			</run>
 		</groups>
+		
 		<packages>
 			<package name="com.qa.tests.ui"></package>
 		</packages>
