@@ -4,7 +4,7 @@ public class UpdateProfileRequest {
 	private String email;
 	private String firstName;
 	private String lastName;
-	private String mobileNumber;
+	private long mobileNumber;
 
 	public String getEmail() {
 		return email;
@@ -30,15 +30,15 @@ public class UpdateProfileRequest {
 		this.lastName = lastName;
 	}
 
-	public String getMobileNumber() {
+	public long getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(String mobileNumber) {
+	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public UpdateProfileRequest(String email, String firstName, String lastName, String mobileNumber) {
+	public UpdateProfileRequest(String email, String firstName, String lastName, long mobileNumber) {
 		super();
 		this.email = email;
 		this.firstName = firstName;
