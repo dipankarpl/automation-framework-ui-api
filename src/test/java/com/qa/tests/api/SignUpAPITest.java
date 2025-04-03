@@ -12,9 +12,12 @@ import io.restassured.response.Response;
 
 @Listeners({ com.qa.listeners.TestListener.class })
 public class SignUpAPITest {
+	
+	FakerUtil fakerUtil;
+	
 	@Test(description = "verify signup api is working", groups = { "sanity" })
 	public void signUpTest() {
-		FakerUtil fakerUtil = new FakerUtil();
+		fakerUtil = new FakerUtil();
 		SignUpRequest signUpRequest = new SignUpRequest(fakerUtil.randomUsername(), "password", fakerUtil.randomEmail(),
 				fakerUtil.randomFirstName(), fakerUtil.randomLastName(), String.valueOf(fakerUtil.randomMobile()));
 		AuthService auth = new AuthService();

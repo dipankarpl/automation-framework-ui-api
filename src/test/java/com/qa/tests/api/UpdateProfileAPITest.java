@@ -10,23 +10,27 @@ import com.qa.api.models.request.LoginRequest;
 import com.qa.api.models.request.UpdateProfileRequest;
 import com.qa.api.models.response.LoginResponse;
 import com.qa.api.models.response.UserProfileResponse;
+import com.qa.utils.FakerUtil;
 
 import io.restassured.response.Response;
 
 @Listeners({ com.qa.listeners.TestListener.class })
 public class UpdateProfileAPITest {
+
+	FakerUtil fakerUtil;
+
 	@Test(description = "verify update profile api is working", groups = { "sanity" })
 	public void updateProfileTest() {
+		fakerUtil = new FakerUtil();
 		AuthService auth = new AuthService();
-		Response res = auth.login(new LoginRequest("dpaul", "password"));
+		Response res = auth.login(new LoginRequest("grandmasti", "password"));
 		LoginResponse loginres = res.as(LoginResponse.class);
 
 		UserManagementService um = new UserManagementService();
 		Response resp = um.updateProfile(loginres.getToken(),
-				new UpdateProfileRequest("dpaul@test.com", "dip", "ron", "9876540123"));
+				new UpdateProfileRequest("grandmasti@test.com", "grand", "masti", fakerUtil.randomMobile()));
 		UserProfileResponse userProfileResponse = resp.as(UserProfileResponse.class);
-		System.out.println(resp.asPrettyString());
-		Assert.assertEquals(userProfileResponse.getUsername(), "dpaul");
+		Assert.assertEquals(userProfileResponse.getUsername(), "grandmasti");
 	}
 
 }
