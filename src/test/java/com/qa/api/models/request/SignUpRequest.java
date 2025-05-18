@@ -7,6 +7,17 @@ public class SignUpRequest {
 	private String firstName;
 	private String lastName;
 	private String mobileNumber;
+	
+	public SignUpRequest(String username, String password, String email, String firstName, String lastName,
+			String mobileNumber) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileNumber = mobileNumber;
+	}
 
 	public String getUsername() {
 		return username;
@@ -56,16 +67,7 @@ public class SignUpRequest {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public SignUpRequest(String username, String password, String email, String firstName, String lastName,
-			String mobileNumber) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.mobileNumber = mobileNumber;
-	}
+	
 
 	@Override
 	public String toString() {
