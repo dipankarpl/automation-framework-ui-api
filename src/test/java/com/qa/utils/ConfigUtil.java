@@ -29,15 +29,15 @@ public class ConfigUtil {
 	}
 
 	public static String getApiUser() {
-		return properties.getProperty("api.user");
+		return properties.getProperty("app.user");
 	}
 
 	public static String getApiPassword() {
-		return properties.getProperty("api.password");
+		return properties.getProperty("app.password");
 	}
 
 	public static String getApiEmail() {
-		return properties.getProperty("api.email");
+		return properties.getProperty("app.email");
 	}
 
 	// Add methods to retrieve other configurations as needed
