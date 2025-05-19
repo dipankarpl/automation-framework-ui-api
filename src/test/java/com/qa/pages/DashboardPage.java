@@ -11,15 +11,24 @@ public class DashboardPage {
 	private WebDriver driver;
 	private BrowserUtil browserUtil;
 	Logger logger = LoggerUtil.getLogger(this.getClass());
-	
-	private static final By USERNAME_LOCATOR = By.cssSelector(".MuiTypography-root.MuiTypography-h4.MuiTypography-gutterBottom.css-pdmxks");
+
+	private static final By USERNAME_LOCATOR = By
+			.cssSelector(".MuiTypography-root.MuiTypography-h4.MuiTypography-gutterBottom.css-pdmxks");
 
 	public DashboardPage(WebDriver driver) {
-		this.driver=driver;
-		browserUtil=new BrowserUtil(driver);
+		this.driver = driver;
+		browserUtil = new BrowserUtil(driver);
 	}
-	
+
 	public String getLoggedInUsername() {
 		return browserUtil.getVisibleText(USERNAME_LOCATOR);
+	}
+
+	public DashboardPage navigateSidebar(String value) {
+		browserUtil.clickOn(By.xpath(
+				"(//span[@class='MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-fyswvn' and contains(text(),'"
+						+ value + "')])[1]"));
+		return this;
+
 	}
 }
