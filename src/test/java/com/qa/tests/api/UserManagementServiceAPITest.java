@@ -21,7 +21,7 @@ public class UserManagementServiceAPITest {
 
 	FakerUtil fakerUtil;
 
-	@Test(description = "verify update profile api is working", groups = { "sanity" })
+	@Test(description = "verify update profile api is working")
 	public void updateProfileTest() {
 		fakerUtil = new FakerUtil();
 		AuthService auth = new AuthService();
@@ -39,7 +39,7 @@ public class UserManagementServiceAPITest {
 		Assert.assertEquals(userProfileResponse.getId(), upr.getId());
 	}
 
-	@Test(description = "verify change password api is working", groups = { "regression" })
+	@Test(description = "verify change password api is working")
 	public void changePasswordTest() {
 		AuthService auth = new AuthService();
 		Response res = auth.login(new LoginRequest(ConfigUtil.getApiUser(), ConfigUtil.getApiPassword()));

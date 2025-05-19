@@ -18,7 +18,7 @@ public class AuthenticationServiceAPITest {
 
 	FakerUtil fakerUtil;
 
-	@Test(description = "verify signup api is working", groups = { "regression" })
+	@Test(description = "verify signup api is working")
 	public void signUpTest() {
 		fakerUtil = new FakerUtil();
 		SignUpRequest signUpRequest = new SignUpRequest(fakerUtil.randomUsername(), "password", fakerUtil.randomEmail(),
@@ -28,7 +28,7 @@ public class AuthenticationServiceAPITest {
 		Assert.assertEquals(res.asPrettyString(), "User registered successfully!");
 	}
 
-	@Test(description = "verify login api is working", groups = { "sanity", "regression" })
+	@Test(description = "verify login api is working")
 	public void loginTestAPI() {
 		LoginRequest loginRequest = new LoginRequest(ConfigUtil.getApiUser(), ConfigUtil.getApiPassword());
 		AuthService auth = new AuthService();
@@ -37,7 +37,7 @@ public class AuthenticationServiceAPITest {
 		Assert.assertEquals(loginResponse.getUsername(), ConfigUtil.getApiUser());
 	}
 
-	@Test(description = "verify forget password api is working", groups = { "sanity" })
+	@Test(description = "verify forget password api is working")
 	public void forgotPasswordTest() {
 		AuthService auth = new AuthService();
 		Response res = auth.forgotPassword(ConfigUtil.getApiEmail());

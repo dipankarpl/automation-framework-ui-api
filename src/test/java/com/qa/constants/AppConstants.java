@@ -7,10 +7,5 @@ public class AppConstants {
 	public static final int DEFAULT_LONG_TIME_OUT = 20;
 	
 	public static final int MAX_NUMBER_OF_ATTEMPTS = 3;
-	
-
-	public static final String LOGIN_PAGE_URL = "/login";
-
-
 
 }
