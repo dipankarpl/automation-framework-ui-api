@@ -29,10 +29,6 @@ public class LoginPage {
 		return browserUtil.getVisibleText(SIGN_IN_TEXT_LOCATOR);
 	}
 	
-	public String getLoginPageURL() {
-		logger.info("Getting url of sign in page");
-		return browserUtil.getPageURL();
-	}
 
 	public DashboardPage goToDashboard(User user) {
 		logger.info("Performing click to sign in to application");

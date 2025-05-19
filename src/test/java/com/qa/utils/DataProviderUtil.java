@@ -38,7 +38,7 @@ public class DataProviderUtil {
 
 		XSSFWorkbook xssfWorkbook = null;
 		Row row;
-		Cell emailAddressCell;
+		Cell usernameCell;
 		Cell passwordCell;
 		User user;
 		List<User> userList = null;
@@ -52,18 +52,16 @@ public class DataProviderUtil {
 			rowIterator.next();
 			while (rowIterator.hasNext()) {
 				row = rowIterator.next();
-				emailAddressCell = row.getCell(0);
+				usernameCell = row.getCell(0);
 				passwordCell = row.getCell(1);
-				user = new User(emailAddressCell.toString(), passwordCell.toString());
+				user = new User(usernameCell.toString(), passwordCell.toString());
 				userList.add(user);
 				xssfWorkbook.close();
 			}
 
 		} catch (InvalidFormatException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 
