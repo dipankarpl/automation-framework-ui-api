@@ -28,12 +28,20 @@ public class LoginPage {
 		logger.info("Getting text of sign in header");
 		return browserUtil.getVisibleText(SIGN_IN_TEXT_LOCATOR);
 	}
-	
 
 	public DashboardPage goToDashboard(User user) {
 		logger.info("Performing click to sign in to application");
 		browserUtil.enterText(USERNAME_LOCATOR, user.getUsername());
 		browserUtil.enterText(PASSWORD_LOCATOR, user.getPassword());
+		browserUtil.clickOn(SIGN_IN_LOCATOR);
+		DashboardPage dashboardPage = new DashboardPage(driver);
+		return dashboardPage;
+	}
+
+	public DashboardPage goToDashboard(String username, String password) {
+		logger.info("Performing click to sign in to application");
+		browserUtil.enterText(USERNAME_LOCATOR, username);
+		browserUtil.enterText(PASSWORD_LOCATOR, password);
 		browserUtil.clickOn(SIGN_IN_LOCATOR);
 		DashboardPage dashboardPage = new DashboardPage(driver);
 		return dashboardPage;

@@ -12,8 +12,7 @@ import com.qa.utils.FakerUtil;
 public class SignupUITest extends TestBase {
 	FakerUtil fakerUtil;
 
-	@Test(description = "Verifies user is able to sign up to the application", groups = { "sanity",
-			"regression" }, retryAnalyzer = com.qa.listeners.MyRetryAnalyzer.class)
+	@Test(description = "Verifies user is able to sign up to the application", groups = { "regression" }, retryAnalyzer = com.qa.listeners.MyRetryAnalyzer.class)
 	public void signupTest() {
 		fakerUtil = new FakerUtil();
 		Registration reg = new Registration(fakerUtil.randomUsername(), fakerUtil.randomEmail(), "password", "password",
