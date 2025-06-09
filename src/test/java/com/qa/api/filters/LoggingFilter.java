@@ -35,7 +35,7 @@ public class LoggingFilter implements Filter {
 	public void logResponse(Response response) {
 		logger.info("STATUS CODE:"+ response.getStatusCode());
 		logger.info("Response Header :"+ response.headers());
-		logger.info("Request Body:"+ response.getBody().prettyPrint());
+		logger.info("Response Body:"+ response.getBody().prettyPrint());
 	}
 
 }

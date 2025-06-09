@@ -27,7 +27,7 @@ public class BrowserUtil {
 
 	public BrowserUtil(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(AppConstants.DEFAULT_MEDIUM_TIME_OUT));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(AppConstants.DEFAULT_LONG_TIME_OUT));
 	}
 
 	public String getVisibleText(By locator) {

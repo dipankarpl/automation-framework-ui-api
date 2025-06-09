@@ -14,9 +14,9 @@
 			<package name="com.qa.tests.ui"></package>
 		</packages>
 
-		<classes>
+		<!--<classes>
 			<class name="com.qa.tests.ui.SignupTest" />
-		</classes>
+		</classes>-->
 
 	</test>
 
@@ -33,9 +33,9 @@
 		</packages>
 
 
-		<classes>
+		<!--<classes>
 			<class name="com.qa.tests.ui.LoginTest" />
-		</classes>
+		</classes>-->
 
 	</test>
 

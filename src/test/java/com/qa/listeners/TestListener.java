@@ -23,28 +23,35 @@ public class TestListener implements ITestListener {
 	ExtentReports extentReports;
 	ExtentTest extentTest;
 
+	private static ThreadLocal<String> browserName = new ThreadLocal<>();
+
 	public void onTestStart(ITestResult result) {
-		logger.info(result.getMethod().getMethodName());
-		logger.info(result.getMethod().getDescription());
-		logger.info(Arrays.toString(result.getMethod().getGroups()));
+		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
+		browserName.set(browser);
+
+		logger.info("Test Started: " + result.getMethod().getMethodName());
+		logger.info("Description: " + result.getMethod().getDescription());
+		logger.info("Groups: " + Arrays.toString(result.getMethod().getGroups()));
+		logger.info("Browser: " + browser);
 		ExtentReportUtil.createExtentTest(result.getMethod().getMethodName());
 
 	}
 
 	public void onTestSuccess(ITestResult result) {
-
+		String browser = browserName.get();
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReportUtil.getTest().log(Status.PASS,
-				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + "PASSED");
+		ExtentReportUtil.getTest().log(Status.PASS, result.getMethod().getMethodName() + " "
+				+ result.getMethod().getDescription() + " " + browser.toUpperCase() + " PASSED");
 	}
 
 	public void onTestFailure(ITestResult result) {
 		logger.error(result.getMethod().getMethodName() + " " + "FAILED");
 		logger.error(result.getThrowable().getMessage());
-		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
-
+		// String browser =
+		// result.getTestContext().getCurrentXmlTest().getParameter("browser");
+		String browser = browserName.get();
 		ExtentReportUtil.getTest().log(Status.FAIL, result.getMethod().getMethodName() + " "
-				+ result.getMethod().getDescription() + " " + browser + " FAILED");
+				+ result.getMethod().getDescription() + " " + browser.toUpperCase() + " FAILED");
 		ExtentReportUtil.getTest().log(Status.FAIL, result.getThrowable().getMessage());
 
 		if (!result.getMethod().getMethodName().contains("API")) {
@@ -60,9 +67,10 @@ public class TestListener implements ITestListener {
 
 	public void onTestSkipped(ITestResult result) {
 		logger.warn(result.getMethod().getMethodName() + " " + "SKIPPED");
-		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
+		String browser = browserName.get();
+//		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
 		ExtentReportUtil.getTest().log(Status.SKIP, result.getMethod().getMethodName() + " "
-				+ result.getMethod().getDescription() + " " + browser + " SKIPPED");
+				+ result.getMethod().getDescription() + " " + browser.toUpperCase() + " SKIPPED");
 
 	}
 
@@ -73,6 +81,7 @@ public class TestListener implements ITestListener {
 
 	public void onFinish(ITestContext context) {
 		logger.info("Test Suite Completed");
+		browserName.remove();
 		ExtentReportUtil.flushReport();
 	}
 }

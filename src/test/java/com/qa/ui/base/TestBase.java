@@ -23,7 +23,7 @@ public class TestBase {
 
 	@BeforeMethod(alwaysRun = true)
 	@Parameters({ "browser" })
-	public void setUp(@Optional("edge") String browser) {
+	public void setUp(@Optional("chrome") String browser) {
 		driver = WebDriverManager.getDriver(browser);
 		logger.info("driver initialization completed");
 		driver.manage().window().maximize();
