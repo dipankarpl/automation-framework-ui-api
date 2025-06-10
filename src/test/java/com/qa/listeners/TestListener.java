@@ -29,19 +29,18 @@ public class TestListener implements ITestListener {
 		String browser = result.getTestContext().getCurrentXmlTest().getParameter("browser");
 		browserName.set(browser);
 
-		logger.info("Test Started: " + result.getMethod().getMethodName());
+		logger.info("Test Started: " + result.getMethod().getMethodName() + " on browser: " + browser);
 		logger.info("Description: " + result.getMethod().getDescription());
 		logger.info("Groups: " + Arrays.toString(result.getMethod().getGroups()));
-		logger.info("Browser: " + browser);
 		ExtentReportUtil.createExtentTest(result.getMethod().getMethodName());
 
 	}
 
 	public void onTestSuccess(ITestResult result) {
-		String browser = browserName.get();
+//		String browser = browserName.get();
 		logger.info(result.getMethod().getMethodName() + " " + "PASSED");
-		ExtentReportUtil.getTest().log(Status.PASS, result.getMethod().getMethodName() + " "
-				+ result.getMethod().getDescription() + " " + browser.toUpperCase() + " PASSED");
+		ExtentReportUtil.getTest().log(Status.PASS,
+				result.getMethod().getMethodName() + " " + result.getMethod().getDescription() + " " + " PASSED");
 	}
 
 	public void onTestFailure(ITestResult result) {
@@ -75,7 +74,7 @@ public class TestListener implements ITestListener {
 	}
 
 	public void onStart(ITestContext context) {
-		logger.info("Test Suite Started");
+		logger.info("Test Suite Started" + context.getSuite().getName());
 		ExtentReportUtil.setupSparkReporter("report.html");
 	}
 

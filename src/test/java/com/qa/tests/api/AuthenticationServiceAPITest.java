@@ -30,11 +30,11 @@ public class AuthenticationServiceAPITest {
 
 	@Test(description = "verify login api is working")
 	public void loginTestAPI() {
-		LoginRequest loginRequest = new LoginRequest(ConfigUtil.getApiUser(), ConfigUtil.getApiPassword());
+		LoginRequest loginRequest = new LoginRequest(ConfigUtil.getUser(), ConfigUtil.getPassword());
 		AuthService auth = new AuthService();
 		Response res = auth.login(loginRequest);
 		LoginResponse loginResponse = res.as(LoginResponse.class);
-		Assert.assertEquals(loginResponse.getUsername(), ConfigUtil.getApiUser());
+		Assert.assertEquals(loginResponse.getUsername(), ConfigUtil.getUser());
 	}
 
 	@Test(description = "verify forget password api is working")

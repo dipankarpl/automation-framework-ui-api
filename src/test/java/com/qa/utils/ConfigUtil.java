@@ -28,11 +28,11 @@ public class ConfigUtil {
 		return properties.getProperty("grid.url");
 	}
 
-	public static String getApiUser() {
+	public static String getUser() {
 		return properties.getProperty("app.user");
 	}
 
-	public static String getApiPassword() {
+	public static String getPassword() {
 		return properties.getProperty("app.password");
 	}
 
