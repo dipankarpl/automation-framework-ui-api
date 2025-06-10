@@ -25,7 +25,7 @@ public class UserManagementServiceAPITest {
 	public void updateProfileTest() {
 		fakerUtil = new FakerUtil();
 		AuthService auth = new AuthService();
-		Response res = auth.login(new LoginRequest(ConfigUtil.getApiUser(), ConfigUtil.getApiPassword()));
+		Response res = auth.login(new LoginRequest(ConfigUtil.getUser(), ConfigUtil.getPassword()));
 		LoginResponse loginres = res.as(LoginResponse.class);
 
 		UserManagementService um = new UserManagementService();
@@ -42,11 +42,11 @@ public class UserManagementServiceAPITest {
 	@Test(description = "verify change password api is working")
 	public void changePasswordTest() {
 		AuthService auth = new AuthService();
-		Response res = auth.login(new LoginRequest(ConfigUtil.getApiUser(), ConfigUtil.getApiPassword()));
+		Response res = auth.login(new LoginRequest(ConfigUtil.getUser(), ConfigUtil.getPassword()));
 
 		UserManagementService um = new UserManagementService();
 		Response rs = um.changePassword(res.as(LoginResponse.class).getToken(), new ChangePasswordRequest(
-				ConfigUtil.getApiPassword(), ConfigUtil.getApiPassword(), ConfigUtil.getApiPassword()));
+				ConfigUtil.getPassword(), ConfigUtil.getPassword(), ConfigUtil.getPassword()));
 		Assert.assertEquals(rs.statusCode(), 200);
 	}
 
